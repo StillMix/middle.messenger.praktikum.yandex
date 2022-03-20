@@ -1,0 +1,34 @@
+mixin inputs(name,types, placeholders)
+  div.form__element
+    p.element__name=name
+    input.element__input(type=types placeholder=placeholders)
+
+
+doctype html 
+html(lang='ru')
+  head 
+    script(src='./profile.js' type='module')
+  body.body 
+    a.btn__back(href="../chat/chat.html")
+        img.btn__image(src="../../image/btnSend-icon.svg")
+    div.popup
+        div.popup__photo
+           img(src="../../image/video-photo-white.svg")
+        p.popup__name Роман
+        form.form.info
+            +inputs('Почта','email', 'Email')
+            +inputs('Логин','text', 'Login')
+            +inputs('Имя','text', 'Name')
+            +inputs('Фамилия','text', 'SecondName')
+            +inputs('Имя в чате','text', 'Name in chat')
+            +inputs('Телефон','tel', 'Number')
+            button.form__btn.btn__info.disable Сохранить
+        form.form.password.disable
+            +inputs('Старый пароль','password', '•••••••••')
+            +inputs('Новый пароль','password', '•••••••••')
+            +inputs('Повторите новый пароль','password', '•••••••••')
+            button.form__btn.btn__password Сохранить
+        div.popup__btns
+            p.popup__btn.data Изменить данные
+            p.popup__btn.btnToPassword Изменить пароль
+            p.popup_btn_back Выйти

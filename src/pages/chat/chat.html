@@ -1,0 +1,68 @@
+<!DOCTYPE html >
+<html lang="ru">
+  <head> 
+    <script src="./chat.js" type="module"></script>
+  </head>
+  <body class="body"> 
+    <div class="chatList"><a class="chatList__link" href="../profile/profile.html">Профиль ></a>
+      <input class="chatList__search" type="text" placeholder="Поиск"/>
+      <ul class="chatList__chat"></ul>
+    </div>
+    <div class="chat menu">
+      <p class="chat__menu">Выберите чат чтобы отправить сообщение</p>
+      <div class="chats disable">
+        <div class="chat__header">
+          <div class="chat_header_avatar"></div>
+          <p class="chat_header_name">Вадим</p><img class="chat_header_btn" src="../../image/menu-icon.svg"/>
+        </div>
+        <div class="chat__section">
+          <div class="chat_section_message"> 
+            <p class="message__text">Привет! Смотри, тут всплыл интересный кусок лунной космической истории — НАСА в какой-то момент попросила Хассельблад адаптировать модель SWC для полетов на Луну. Сейчас мы все знаем что астронавты летали с моделью 500 EL — и к слову говоря, все тушки этих камер все еще находятся на поверхности Луны, так как астронавты с собой забрали только кассеты с пленкой.Хассельблад в итоге адаптировал SWC для космоса, но что-то пошло не так и на ракету они так никогда и не попали. Всего их было произведено 25 штук, одну из них недавно продали на аукционе за 45000 евро.</p>
+            <p class="message__date">11:56</p>
+          </div>
+          <div class="chat_section_message"> <img class="message__image" src="../../image/messageImage.svg"/>
+            <p class="message__date">11:56</p>
+          </div>
+          <div class="chat_section_meMessage"> 
+            <p class="message__text">Круто</p>
+            <p class="message__date">12:00</p>
+          </div>
+        </div>
+        <div class="chat__footer"><img class="chat__dopMenu" src="../../image/dopMenu-icon.svg"/>
+          <input class="chat_footer_input" placeholder="Сообщение"/><img class="chat_btn" src="../../image/btnSend-icon.svg"/>
+        </div>
+      </div>
+    </div>
+    <div class="popup popupPerson disable">
+      <div class="popup__btn"><img class="popup__img" src="../../image/plus.svg"/>
+        <p class="popup__text">Добавить пользователя</p>
+      </div>
+      <div class="popup__btn"><img class="popup__img" src="../../image/antiPlus.svg"/>
+        <p class="popup__text">Удалить пользователя</p>
+      </div>
+    </div>
+    <div class="popup popupFile disable">
+      <div class="popup__btn"><img class="popup__img" src="../../image/video-photo.svg"/>
+        <p class="popup__text">Фото или Видео</p>
+      </div>
+      <div class="popup__btn"><img class="popup__img" src="../../image/fail.svg"/>
+        <p class="popup__text">Файл</p>
+      </div>
+      <div class="popup__btn"><img class="popup__img" src="../../image/location.svg"/>
+        <p class="popup__text">Локация</p>
+      </div>
+    </div>
+    <template class="element-template">
+      <li class="chat__person">
+        <div class="person__avatar"></div>
+        <div class="person__info">
+          <p class="person__name"></p>
+          <p class="person__lastMessage"></p>
+        </div>
+        <div class="person__message">
+          <p class="persone_message_date"></p>
+        </div>
+      </li>
+    </template>
+  </body>
+</html>
