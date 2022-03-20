@@ -1,3 +1,3 @@
-https://app.netlify.com/sites/goofy-hodgkin-0f663b/overview
+https://elegant-pasteur-a3b055.netlify.app/
 
-https://github.com/StillMix/middle.messenger.praktikum.yandex/pull/1
+https://github.com/StillMix/middle.messenger.praktikum.yandex/pull/2
