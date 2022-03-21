@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "node ./app.js",
+    "start": "node ./api/server.js",
     "dev": "parcel ./src/pages/index.html",
     "build": "parcel build index.html"
   },
@@ -20,9 +20,11 @@
   },
   "homepage": "https://github.com/StillMix/middle.messenger.praktikum.yandex#readme",
   "dependencies": {
+    "dotenv": "^16.0.0",
     "pug": "^3.0.2"
   },
   "devDependencies": {
+    "express": "^4.17.3",
     "parcel": "^2.3.2"
   }
 }
