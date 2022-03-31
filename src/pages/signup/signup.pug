@@ -1,0 +1,23 @@
+mixin inputs(name,types, placeholders)
+  div.popup__container 
+    p.popup_container_text name
+    input.popup_container_input(type=types placeholder=placeholders)
+
+doctype html 
+html(lang='ru')
+  head 
+    script(src='./signup.js' type='module')
+  body.body 
+    div.popup
+      p.popup__title Регистрация
+      div.popup__inputs
+        +inputs('Почта','email', 'Введите Почту')
+        +inputs('Логин','text', 'Введите Логин')
+        +inputs('Имя','text', 'Введите Логин')
+        +inputs('Фамилия','text', 'Введите Фамилию')
+        +inputs('Телефон','tel', 'Введите Телефон')
+        +inputs('Пароль','password', 'Введите Пароль')
+        +inputs('Пароль ещё раз','password', 'Введите Пароль повторно')
+      a(href="../chat/chat.html")
+        button.popup__btn Зарегистрироваться
+      a.popup__redirect(href="../index.html") Войти?

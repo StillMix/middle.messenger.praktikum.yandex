@@ -1,0 +1,51 @@
+mixin btn(name, srcs)
+  div.popup__btn
+    img.popup__img(src=srcs)
+    p.popup__text=name
+
+
+doctype html 
+html(lang='ru')
+  head 
+    script(src='./chat.js' type='module')
+  body.body 
+    div.chatList
+      a.chatList__link(href="../profile/profile.html") Профиль >
+      input.chatList__search(type="text" placeholder="Поиск")
+      ul.chatList__chat
+    div.chat.menu
+      p.chat__menu Выберите чат чтобы отправить сообщение
+      div.chats.disable
+        div.chat__header
+          div.chat_header_avatar
+          p.chat_header_name Вадим
+          img.chat_header_btn(src="../../image/menu-icon.svg")
+        div.chat__section
+            div.chat_section_message 
+              p.message__text Привет! Смотри, тут всплыл интересный кусок лунной космической истории — НАСА в какой-то момент попросила Хассельблад адаптировать модель SWC для полетов на Луну. Сейчас мы все знаем что астронавты летали с моделью 500 EL — и к слову говоря, все тушки этих камер все еще находятся на поверхности Луны, так как астронавты с собой забрали только кассеты с пленкой.Хассельблад в итоге адаптировал SWC для космоса, но что-то пошло не так и на ракету они так никогда и не попали. Всего их было произведено 25 штук, одну из них недавно продали на аукционе за 45000 евро.
+              p.message__date 11:56
+            div.chat_section_message 
+              img.message__image(src="../../image/messageImage.svg")
+              p.message__date 11:56
+            div.chat_section_meMessage 
+              p.message__text Круто
+              p.message__date 12:00
+        div.chat__footer
+          img.chat__dopMenu(src="../../image/dopMenu-icon.svg")
+          input.chat_footer_input(placeholder="Сообщение")
+          img.chat_btn(src="../../image/btnSend-icon.svg")
+    div.popup.popupPerson.disable
+      +btn('Добавить пользователя', "../../image/plus.svg")
+      +btn('Удалить пользователя', "../../image/antiPlus.svg")
+    div.popup.popupFile.disable
+      +btn('Фото или Видео', "../../image/video-photo.svg")
+      +btn('Файл', "../../image/fail.svg")
+      +btn('Локация', "../../image/location.svg")
+    template.element-template
+      li.chat__person
+        div.person__avatar
+        div.person__info
+          p.person__name
+          p.person__lastMessage
+        div.person__message
+          p.persone_message_date

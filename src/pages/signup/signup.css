@@ -1,0 +1,95 @@
+@import url(../../fonts/Inter/inter.css);
+@import url(../../vendor/normalize.css);
+
+.body {
+  background: #007bd5;
+  position: relative;
+}
+
+.popup {
+  width: 340px;
+  background: #ffffff;
+  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.14);
+  border-radius: 12px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+}
+
+.popup__title {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 20px;
+  /* identical to box height, or 100% */
+
+  text-align: center;
+
+  color: #1e1e1e;
+}
+.popup__container {
+  margin-top: 16px;
+  margin-bottom: 0;
+  margin-left: 30px;
+}
+
+.popup__inputs {
+  margin-top: 40px;
+}
+
+.popup_container_text {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 9px;
+  line-height: 9px;
+  /* identical to box height, or 100% */
+
+  color: #999999;
+  margin-top: 0;
+}
+
+.popup_container_input {
+  border: none;
+  width: 280px;
+  outline: none;
+  color: black;
+  border-bottom: 1px solid #3369f3;
+  padding-bottom: 7px;
+}
+
+.popup__btn {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 13px;
+  /* identical to box height, or 100% */
+
+  text-align: center;
+
+  color: #ffffff;
+  background: #3369f3;
+  border-radius: 8px;
+  width: 280px;
+  height: 37px;
+  margin-left: 30px;
+  margin-top: 160px;
+}
+.popup__redirect {
+  display: block;
+  text-align: center;
+  margin-top: 14px;
+  text-decoration: none;
+  margin-bottom: 30px;
+}
+
+.popup__redirect:hover {
+  opacity: 0.8;
+}

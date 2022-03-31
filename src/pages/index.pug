@@ -1,0 +1,18 @@
+mixin inputs(name,types, placeholders)
+  div.popup__container 
+    p.popup_container_text name
+    input.popup_container_input(type=types placeholder=placeholders)
+
+doctype html 
+html(lang='ru')
+  head 
+    script(src='../index.js' type='module')
+  body.body 
+    div.popup
+      p.popup__title Вход
+      div.popup__inputs
+        +inputs('Логин','text', 'Введите Логин')
+        +inputs('Пароль','password', 'Введите Пароль')
+      a(href="./chat/chat.html")
+        button.popup__btn Авторизоваться
+      a.popup__redirect(href="./signup/signup.html") Нет аккаунта?
