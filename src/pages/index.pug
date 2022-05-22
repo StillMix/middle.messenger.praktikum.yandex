@@ -1,21 +1,22 @@
-mixin inputs(name,types, placeholders)
+mixin inputs(name ,types, placeholders, id)
   div.popup__container 
-    p.popup_container_text name
-    input.popup_container_input.input(type=types placeholder=placeholders)
+    p.popup_container_text=name
+    input.input.popup_container_input(name=id+"Input" type=types id="card-"+id placeholder=placeholders required  minlength="2" maxlength="200")
 
 
 html(lang='ru')
   head 
-    script(src='./index.js' type='module')
+    script(src='./index.ts' type='module')
   body.body 
     div.popup
       p.popup__title Вход
-    div.popup_type_login
-      form.popup__inputs.form
-        +inputs('Логин','text', 'Введите Логин')
-        span.popup__error.profile-login
-        +inputs('Пароль','password', 'Введите Пароль')
-        span.popup__error.profile-password
-      a(href="./chat/chat.html")
-        button(type="submit").popup__btn Авторизоваться
+      form(class='form popup__inputs', name='login')
+        label
+          +inputs('Логин','login', 'Введите Логин', 'login')
+          span.popup_error.card-login-error 
+        label
+          +inputs('Пароль','password', 'Введите Пароль','onepassword')
+          span.popup_error.card-onepassword-error 
+        a(href="./chat/chat.html")
+        button.popup__btn(type="submite") Авторизоваться
       a.popup__redirect(href="./signup/signup.html") Нет аккаунта?
