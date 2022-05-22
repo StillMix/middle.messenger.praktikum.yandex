@@ -1,18 +1,21 @@
 mixin inputs(name,types, placeholders)
   div.popup__container 
     p.popup_container_text name
-    input.popup_container_input(type=types placeholder=placeholders)
+    input.popup_container_input.input(type=types placeholder=placeholders)
 
-doctype html 
+
 html(lang='ru')
   head 
-    script(src='../index.js' type='module')
+    script(src='./index.js' type='module')
   body.body 
     div.popup
       p.popup__title Вход
-      div.popup__inputs
+    div.popup_type_login
+      form.popup__inputs.form
         +inputs('Логин','text', 'Введите Логин')
+        span.popup__error.profile-login
         +inputs('Пароль','password', 'Введите Пароль')
+        span.popup__error.profile-password
       a(href="./chat/chat.html")
-        button.popup__btn Авторизоваться
+        button(type="submit").popup__btn Авторизоваться
       a.popup__redirect(href="./signup/signup.html") Нет аккаунта?
