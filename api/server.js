@@ -1,11 +1,12 @@
 const express = require('express');
+
 const app = express();
 const dotenv = require('dotenv');
 
-dotenv.config()
+dotenv.config();
 
-const {PORT = 3000} = process.env
- 
+const { PORT = 3000 } = process.env;
+
 app.use(express.static(`${__dirname}, "../dist/index.html"`));
 
 app.listen(PORT, () => {

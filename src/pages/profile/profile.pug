@@ -1,13 +1,20 @@
-mixin inputs(name,types, placeholders)
-  div.form__element
-    p.element__name=name
-    input.element__input(type=types placeholder=placeholders)
+mixin inputs(name ,types, placeholders, id)
+ label
+  div.popup__container 
+    p.popup_container_text= name
+    input.input.popup_container_input(name=id+"Input" type=types id="card-"+id placeholder=placeholders required  minlength="2" maxlength="200")
+    span(class='popup_error card-'+id+'-error')
 
-
+mixin inputs(name ,types, placeholders, id)
+ label
+  div.popup__container 
+    p.popup_container_text= name
+    input.input.popup_container_input(name=id+"Input" type=types id="card-"+id placeholder=placeholders required  minlength="2" maxlength="200")
+    span(class='popup_error card-'+id+'-error')
 
 html(lang='ru')
   head 
-    script(src='./profile.js' type='module')
+    script(src='./profile.ts' type='module')
   body.body 
     a.btn__back(href="../chat/chat.html")
         img.btn__image(src="../../image/btnSend-icon.svg")
@@ -15,20 +22,20 @@ html(lang='ru')
         div.popup__photo
            img(src="../../image/video-photo-white.svg")
         p.popup__name Роман
-        form.form.info
-            +inputs('Почта','email', 'Email')
-            +inputs('Логин','text', 'Login')
-            +inputs('Имя','text', 'Name')
-            +inputs('Фамилия','text', 'SecondName')
-            +inputs('Имя в чате','text', 'Name in chat')
-            +inputs('Телефон','tel', 'Number')
-            button.form__btn.btn__info.disable Сохранить
+        form(class='form popup__inputs info disableinput', name='profile')
+          +inputs('Почта','Email', 'Введите Почту', 'email')
+          +inputs('Логин','login', 'Введите Логин', 'login')
+          +inputs('Имя','name', 'Введите Имя','name')
+          +inputs('Фамилия','surname', 'Введите Фамилию','surname')
+          +inputs('Телефон','tel', 'Введите Телефон','tel')
+          button.form__btn.btn__info.disable Сохранить
         form.form.password.disable
-            +inputs('Старый пароль','password', '•••••••••')
-            +inputs('Новый пароль','password', '•••••••••')
-            +inputs('Повторите новый пароль','password', '•••••••••')
+            +inputs('Старый пароль','password', '•••••••••', 'password')
+            +inputs('Новый пароль','password', '•••••••••', 'onepassword')
+            +inputs('Повторите новый пароль','password', '•••••••••', 'secondepassword')
             button.form__btn.btn__password Сохранить
         div.popup__btns
             p.popup__btn.data Изменить данные
             p.popup__btn.btnToPassword Изменить пароль
             p.popup_btn_back Выйти
+

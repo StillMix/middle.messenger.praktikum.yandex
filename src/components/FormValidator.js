@@ -1,3 +1,6 @@
+/* eslint-disable no-console */
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable no-undef */
 export default class FormValidator {
   constructor(config, form) {
     this._form = document.querySelector(form);
@@ -15,7 +18,7 @@ export default class FormValidator {
     this._button = this._form.querySelector(this._submitButtonSelector);
 
     this._inputList = Array.from(
-      this._form.querySelectorAll(this._inputSelector)
+      this._form.querySelectorAll(this._inputSelector),
     );
   }
 
@@ -27,24 +30,20 @@ export default class FormValidator {
 
   _hasInvalidInput() {
     return this._inputList.some((input) => {
-        if (input.value === '') {
-            return input.validity.valid
-        }else {
-            return input.validity.valid
-        }
-
+      if (input.value === '') {
+        return input.validity.valid;
+      }
+      return input.validity.valid;
     });
   }
 
   _toggleButtonState() {
     if (this._hasInvalidInput(this._inputList) === false) {
-        console.log('123')
       this.disableSubmitButton();
     } else {
-        this._button.classList.remove(this._inactiveButtonClass);
-            
-        this._button.disabled = false;
+      this._button.classList.remove(this._inactiveButtonClass);
 
+      this._button.disabled = false;
     }
   }
 
@@ -61,7 +60,7 @@ export default class FormValidator {
 
     input.classList.remove(this._inputErrorClass);
 
-    errorElement.textContent = "";
+    errorElement.textContent = '';
   }
 
   _isValid(input) {
@@ -74,7 +73,7 @@ export default class FormValidator {
 
   _setEventListeners() {
     this._inputList.forEach((input) => {
-      input.addEventListener("input", () => {
+      input.addEventListener('input', () => {
         this._isValid(input);
 
         this._toggleButtonState();

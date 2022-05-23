@@ -7,46 +7,58 @@
     <div class="popup">
       <div class="popup__photo"><img src="../../image/video-photo-white.svg"/></div>
       <p class="popup__name">Роман</p>
-      <form class="form info">
-        <div class="form__element">
-          <p class="element__name">Почта</p>
-          <input class="element__input" type="email" placeholder="Email"/>
-        </div>
-        <div class="form__element">
-          <p class="element__name">Логин</p>
-          <input class="element__input" type="text" placeholder="Login"/>
-        </div>
-        <div class="form__element">
-          <p class="element__name">Имя</p>
-          <input class="element__input" type="text" placeholder="Name"/>
-        </div>
-        <div class="form__element">
-          <p class="element__name">Фамилия</p>
-          <input class="element__input" type="text" placeholder="SecondName"/>
-        </div>
-        <div class="form__element">
-          <p class="element__name">Имя в чате</p>
-          <input class="element__input" type="text" placeholder="Name in chat"/>
-        </div>
-        <div class="form__element">
-          <p class="element__name">Телефон</p>
-          <input class="element__input" type="tel" placeholder="Number"/>
-        </div>
+      <form class="form popup__inputs info disableinput" name="profile">
+        <label>
+          <div class="popup__container"> 
+            <p class="popup_container_text">Почта</p>
+            <input class="input popup_container_input" name="emailInput" type="Email" id="card-email" placeholder="Введите Почту" required="required" minlength="2" maxlength="200"/><span class="popup_error card-email-error"></span>
+          </div>
+        </label>
+        <label>
+          <div class="popup__container"> 
+            <p class="popup_container_text">Логин</p>
+            <input class="input popup_container_input" name="loginInput" type="login" id="card-login" placeholder="Введите Логин" required="required" minlength="2" maxlength="200"/><span class="popup_error card-login-error"></span>
+          </div>
+        </label>
+        <label>
+          <div class="popup__container"> 
+            <p class="popup_container_text">Имя</p>
+            <input class="input popup_container_input" name="nameInput" type="name" id="card-name" placeholder="Введите Имя" required="required" minlength="2" maxlength="200"/><span class="popup_error card-name-error"></span>
+          </div>
+        </label>
+        <label>
+          <div class="popup__container"> 
+            <p class="popup_container_text">Фамилия</p>
+            <input class="input popup_container_input" name="surnameInput" type="surname" id="card-surname" placeholder="Введите Фамилию" required="required" minlength="2" maxlength="200"/><span class="popup_error card-surname-error"></span>
+          </div>
+        </label>
+        <label>
+          <div class="popup__container"> 
+            <p class="popup_container_text">Телефон</p>
+            <input class="input popup_container_input" name="telInput" type="tel" id="card-tel" placeholder="Введите Телефон" required="required" minlength="2" maxlength="200"/><span class="popup_error card-tel-error"></span>
+          </div>
+        </label>
         <button class="form__btn btn__info disable">Сохранить</button>
       </form>
       <form class="form password disable">
-        <div class="form__element">
-          <p class="element__name">Старый пароль</p>
-          <input class="element__input" type="password" placeholder="•••••••••"/>
-        </div>
-        <div class="form__element">
-          <p class="element__name">Новый пароль</p>
-          <input class="element__input" type="password" placeholder="•••••••••"/>
-        </div>
-        <div class="form__element">
-          <p class="element__name">Повторите новый пароль</p>
-          <input class="element__input" type="password" placeholder="•••••••••"/>
-        </div>
+        <label>
+          <div class="popup__container"> 
+            <p class="popup_container_text">Старый пароль</p>
+            <input class="input popup_container_input" name="passwordInput" type="password" id="card-password" placeholder="•••••••••" required="required" minlength="2" maxlength="200"/><span class="popup_error card-password-error"></span>
+          </div>
+        </label>
+        <label>
+          <div class="popup__container"> 
+            <p class="popup_container_text">Новый пароль</p>
+            <input class="input popup_container_input" name="onepasswordInput" type="password" id="card-onepassword" placeholder="•••••••••" required="required" minlength="2" maxlength="200"/><span class="popup_error card-onepassword-error"></span>
+          </div>
+        </label>
+        <label>
+          <div class="popup__container"> 
+            <p class="popup_container_text">Повторите новый пароль</p>
+            <input class="input popup_container_input" name="secondepasswordInput" type="password" id="card-secondepassword" placeholder="•••••••••" required="required" minlength="2" maxlength="200"/><span class="popup_error card-secondepassword-error"></span>
+          </div>
+        </label>
         <button class="form__btn btn__password">Сохранить</button>
       </form>
       <div class="popup__btns">
