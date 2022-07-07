@@ -1,11 +1,7 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable no-undef */
-/* eslint-disable import/prefer-default-export */
-/* eslint-disable import/extensions */
-// eslint-disable-next-line linebreak-style
+
 import './style.css';
-import FormValidator from '../components/FormValidator.js';
-import PopupWithForm from '../components/PopupWithForm.js';
+import FormValidator from '../components/FormValidator';
+import PopupWithForm from '../components/PopupWithForm';
 
 export const validationConfig = {
   formSelector: '.form',
