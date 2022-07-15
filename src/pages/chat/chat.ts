@@ -1,7 +1,4 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable no-shadow */
-/* eslint-disable eqeqeq */
-/* eslint-disable no-undef */
+
 
 import './chat.css';
 

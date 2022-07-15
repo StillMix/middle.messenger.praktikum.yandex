@@ -1,7 +1,4 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable no-undef */
-/* eslint-disable import/prefer-default-export */
-/* eslint-disable import/extensions */
+
 import './signup.css';
 import FormValidator from '../../components/FormValidator';
 import PopupWithForm from '../../components/PopupWithForm';

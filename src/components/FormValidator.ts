@@ -1,15 +1,13 @@
-/* eslint-disable no-console */
-/* eslint-disable no-underscore-dangle */
-/* eslint-disable no-undef */
+
 export default class FormValidator {
-  private _form: any;
-  private _inactiveButtonClass: any;
-  private _inputErrorClass: any;
-  _inputSelector: any;
-  _submitButtonSelector: any;
-  _formSelector: any;
-  _button: any;
-  _inputList: unknown[];
+  private _form: HTMLFormElement;
+  private _inactiveButtonClass: HTMLButtonElement;
+  private _inputErrorClass: HTMLInputElement;
+  private _inputSelector: HTMLInputElement;
+  private _submitButtonSelector: HTMLButtonElement;
+  private _formSelector: HTMLFormElement;
+  private _button: HTMLButtonElement;
+  private _inputList: unknown[];
   constructor(config, form) {
     this._form = document.querySelector(form);
 
@@ -23,7 +21,7 @@ export default class FormValidator {
 
     this._formSelector = config.formSelector;
 
-    this._button = this._form.querySelector(this._submitButtonSelector);
+    this._button = (<Element>this._form).querySelector(this._submitButtonSelector);
 
     this._inputList = Array.from(
       this._form.querySelectorAll(this._inputSelector),
