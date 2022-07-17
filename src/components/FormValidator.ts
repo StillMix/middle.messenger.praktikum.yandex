@@ -1,11 +1,11 @@
 
 export default class FormValidator {
   private _form: HTMLFormElement;
-  private _inactiveButtonClass: HTMLButtonElement;
-  private _inputErrorClass: HTMLInputElement;
-  private _inputSelector: HTMLInputElement;
-  private _submitButtonSelector: HTMLButtonElement;
-  private _formSelector: HTMLFormElement;
+  private _inactiveButtonClass: string;
+  private _inputErrorClass: string;
+  private _inputSelector: string;
+  private _submitButtonSelector: string;
+  private _formSelector: string;
   private _button: HTMLButtonElement;
   private _inputList: unknown[];
   constructor(config, form) {
@@ -21,7 +21,7 @@ export default class FormValidator {
 
     this._formSelector = config.formSelector;
 
-    this._button = (<Element>this._form).querySelector(this._submitButtonSelector);
+    this._button = (<HTMLFormElement>this._form).querySelector(this._submitButtonSelector)!;
 
     this._inputList = Array.from(
       this._form.querySelectorAll(this._inputSelector),
@@ -53,7 +53,7 @@ export default class FormValidator {
   }
 
   _showInputError(input:HTMLInputElement, errorMessage:string) {
-    const errorElement = this._form.querySelector(`.${input.id}-error`);
+    const errorElement = this._form.querySelector(`.${input.id}-error`)!;
 
     input.classList.add(this._inputErrorClass);
 
@@ -61,7 +61,7 @@ export default class FormValidator {
   }
 
   _hideInputError(input:HTMLInputElement) {
-    const errorElement = this._form.querySelector(`.${input.id}-error`);
+    const errorElement = this._form.querySelector(`.${input.id}-error`)!;
 
     input.classList.remove(this._inputErrorClass);
 

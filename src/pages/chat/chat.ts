@@ -34,6 +34,7 @@ const initialCards = [{
   message: 'fgdsfsdfsdf',
   date: '10:49',
   quantity: '2',
+  counter: true,
 },
 
 {
@@ -41,6 +42,7 @@ const initialCards = [{
   message: 'asdasedwe',
   date: '12:49',
   quantity: '0',
+  counter: false,
 },
 
 {
@@ -48,6 +50,7 @@ const initialCards = [{
   message: 'jjjjjj',
   date: '10:49',
   quantity: '3',
+  counter: true,
 },
 
 {
@@ -55,6 +58,7 @@ const initialCards = [{
   message: 'rwerq weq',
   date: '15:49',
   quantity: '0',
+  counter: false,
 },
 
 {
@@ -62,6 +66,7 @@ const initialCards = [{
   message: 'qwegfdgkkkkk',
   date: 'Пт',
   quantity: '0',
+  counter: false,
 },
 
 {
@@ -69,6 +74,7 @@ const initialCards = [{
   message: 'wsrewr241412412',
   date: 'Ср',
   quantity: '0',
+  counter: false,
 },
 ];
 
@@ -76,7 +82,7 @@ function renderCard(data:Node, wrap:HTMLDivElement) {
   wrap.append(data);
 }
 
-function createCard(name:string, message:string, date:string, quantity:string) {
+function createCard(name:string, message:string, date:string, quantity:string, counter: boolean) {
   const messageTemplateClone = messageTemplate.cloneNode(true);
   const messageName = (<Element>messageTemplateClone).querySelector('.person__name')!;
   const messageMessage = (<Element>messageTemplateClone).querySelector('.person__lastMessage')!;
@@ -85,7 +91,7 @@ function createCard(name:string, message:string, date:string, quantity:string) {
   messageMessage.textContent = message;
   messageDate.textContent = date;
 
-  if (quantity > 0) {
+  if (counter == true) {
     const message = (<Element>messageTemplateClone).querySelector('.person__message')!;
     const s = document.createElement('p');
     s.setAttribute('class', 'persone_message_quantity');
@@ -107,6 +113,7 @@ initialCards.forEach((element) => {
   const { message } = element;
   const { date } = element;
   const { quantity } = element;
-  const newCard = createCard(name, message, date, quantity);
+  const { counter } = element
+  const newCard = createCard(name, message, date, quantity, counter);
   renderCard(newCard, messageContainer);
 });

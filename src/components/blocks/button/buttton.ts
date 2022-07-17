@@ -1,8 +1,9 @@
 import {Block} from '../../modules/block';
 import { template } from './button.tmpl';
-import  compile  from '../../modules/templator'
+import Templator  from '../../modules/templator'
 
 export default class Button extends Block {
+  props: HTMLElement;
   constructor(props) {
         // Создаём враппер DOM-элемент button
     super("button", props);
@@ -10,7 +11,7 @@ export default class Button extends Block {
 
   render() {
         // В данном случае render возвращает строкой разметку из шаблонизатора
-    return compile(template, this.props);
+    return Templator.compile(template, this.props);
   }
 } 
 

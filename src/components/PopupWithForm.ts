@@ -1,8 +1,8 @@
 
 export default class PopupWithForm {
- private _submitCallback: void;
+ private _submitCallback: Function;
  private _form: HTMLFormElement;
- private _inputList: unknown[];
+ private _inputList: NodeListOf<HTMLInputElement>;
  private _formValues: {};
   constructor(
     form,

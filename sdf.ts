@@ -1,21 +1,23 @@
-import { EventBus } from "./event-bus";
-
-// Нельзя создавать экземпляр данного класса
-export class Block {
+import { EventBus } from "./src/components/modules/event-bus";
+class Block {
   static EVENTS = {
     INIT: "init",
     FLOW_CDM: "flow:component-did-mount",
     FLOW_RENDER: "flow:render"
   };
 
-  protected _element: HTMLElement | null = null;
+  _element = null;
+  _meta: { tagName: string; props: {}; } ;
+    props: Object;
+    eventBus: () => EventBus;
 
-  eventBus: () => EventBus;
-  props: Object;
-  tagName: string;
-  _meta: { tagName: string; props: {}; };
-
-  constructor(tagName = "div", props = {}) {
+  /** JSDoc
+   * @param {string} tagName
+   * @param {Object} props
+   *
+   * @returns {void}
+   */
+  constructor(tagName: string = "div", props: object = {}): void {
     const eventBus = new EventBus();
 
     this._meta = {
@@ -33,6 +35,7 @@ export class Block {
 
   _registerEvents(eventBus) {
     eventBus.on(Block.EVENTS.INIT, this.init.bind(this));
+    eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
     eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this));
   }
 
@@ -46,13 +49,19 @@ export class Block {
     this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
   }
 
-    dispatchComponentDidMount() {
-        this.eventBus().emit(Block.EVENTS.FLOW_CDM);
-    }
-  _eventBus() {
-    throw new Error("Method not implemented.");
+  _componentDidMount() {
+    this.componentDidMount();
   }
 
+  componentDidMount(oldProps) {}
+
+    dispatchComponentDidMount() {
+        this._eventBus().emit(Block.EVENTS.FLOW_CDM);
+    }
+
+  _componentDidUpdate(oldProps, newProps) {
+    ...
+  }
 
   componentDidUpdate(oldProps, newProps) {
     return true;
@@ -76,13 +85,11 @@ export class Block {
     // Используйте шаблонизатор из npm или напишите свой безопасный
     // Нужно компилировать не в строку (или делать это правильно),
     // либо сразу превращать в DOM-элементы и возвращать из compile DOM-ноду
-    this._element!.replaceWith(block);
+    this._element.innerHTML = block;
   }
 
     // Переопределяется пользователем. Необходимо вернуть разметку
-  render() {
-    
-  }
+  render() {}
 
   getContent() {
     return this.element;
