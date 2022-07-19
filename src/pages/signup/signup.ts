@@ -27,6 +27,6 @@ validateNewPerson.enableValidation();
 
 const NewPersonValues = new PopupWithForm('.popup__inputs', (values) => {
   console.log(values);
-  window.location.href = 'http://localhost:1234';
+  window.location.href = 'http://localhost:3000';
 });
 NewPersonValues.setEventListeners();

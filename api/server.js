@@ -1,13 +1,15 @@
 const express = require('express');
+const path = require('path');
 
-const app = express();
 const dotenv = require('dotenv');
+dotenv.config()
 
-dotenv.config();
+const {PORT = 3000} = process.env
 
-const { PORT = 3000 } = process.env;
+ const dirPath = path.join(__dirname, '../dist');
 
-app.use(express.static(`${__dirname}, "../dist/index.html"`));
+ const app = express();
+app.use(express.static(dirPath));
 
 app.listen(PORT, () => {
   console.log(`Мой текст в логе после запуска ${PORT}!`);

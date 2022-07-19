@@ -9,9 +9,6 @@ export default class Button extends Block {
     super("button", props);
   }
 
-  render() {
-        // В данном случае render возвращает строкой разметку из шаблонизатора
-    return Templator.compile(template, this.props);
-  }
+
 } 
 

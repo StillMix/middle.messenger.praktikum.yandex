@@ -1,4 +1,4 @@
-enum METHOD {
+enum METHODS {
   GET = 'GET',
   POST = 'POST',
   PUT = 'PUT',
@@ -7,7 +7,7 @@ enum METHOD {
 };
 
 type Options = {
-method: METHOD;
+method: METHODS;
 data?: any;
 };
 
@@ -15,10 +15,29 @@ type OptionsWithoutMethod = Omit<Options, 'method'>;
 
 class HTTPTransport {
 get(url: string, options: OptionsWithoutMethod = {}): Promise<XMLHttpRequest> {
-return this.request(url, {...options, method: METHOD.GET});
+return this.request(url, {...options, method: METHODS.GET});
 };
 
-request(url: string, options: Options = { method: METHOD.GET }): Promise<XMLHttpRequest> {
+post(url: string, options: OptionsWithoutMethod = {}): Promise<XMLHttpRequest> {
+  return this.request(url, { ...options, method: METHODS.POST });
+};
+
+put(url: string, options: OptionsWithoutMethod = {}): Promise<XMLHttpRequest> {
+  return this.request(url, { ...options, method: METHODS.PUT });
+};
+
+patch(url: string, options: OptionsWithoutMethod = {}): Promise<XMLHttpRequest> {
+  return this.request(url, { ...options, method: METHODS.PATCH });
+};
+
+delete(url: string, options: OptionsWithoutMethod = {}): Promise<XMLHttpRequest> {
+  return this.request(url, { ...options, method: METHODS.DELETE });
+};
+
+
+
+
+request(url: string, options: Options = { method: METHODS.GET }): Promise<XMLHttpRequest> {
 const {method, data} = options;
 
 return new Promise((resolve, reject) => {
@@ -33,7 +52,7 @@ xhr.onabort = reject;
 xhr.onerror = reject;
 xhr.ontimeout = reject;
 
-if (method === METHOD.GET || !data) {
+if (method === METHODS.GET || !data) {
   xhr.send();
 } else {
   xhr.send(data);

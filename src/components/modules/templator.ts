@@ -20,7 +20,22 @@ export default class Templator {
           if (key[1]) {
                   const tmplValue = key[1].trim();
                   // get — функция, написанная ранее в уроке
-            const data = window.get(ctx, tmplValue);
+            const data = function get(obj, path) {
+              const keys = path.split('.');
+          
+              let result = obj;
+              for (let key of keys) {
+                const value = result[key];
+          
+                if (!value) {
+                  return undefined;        
+                }
+          
+                result = value;
+              }
+          
+              return result;
+          }
   
                   if (typeof data === "function") {
               window[tmplValue] = data;

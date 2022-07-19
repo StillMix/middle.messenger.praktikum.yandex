@@ -7,24 +7,24 @@ const messageContainer: HTMLDivElement = document.querySelector('.chatList__chat
 const btnPerson: HTMLButtonElement = document.querySelector('.chat_header_btn')!;
 const btnFiel: HTMLDivElement = document.querySelector('.chat__dopMenu')!;
 
-let fielOpen = 0;
-let personOpen = 0;
+let fielOpen = false;
+let personOpen = false;
 
 btnPerson.addEventListener('click', () => {
-  if (personOpen == 0) {
-    personOpen = 1;
+  if (personOpen == false) {
+    personOpen = true;
     document.querySelector('.popupPerson')!.classList.remove('disable');
   } else {
-    personOpen = 0;
+    personOpen = false;
     document.querySelector('.popupPerson')!.classList.add('disable');
   }
 });
 btnFiel.addEventListener('click', () => {
-  if (fielOpen == 0) {
-    fielOpen = 1;
+  if (fielOpen == false) {
+    fielOpen = true;
     document.querySelector('.popupFile')!.classList.remove('disable');
   } else {
-    fielOpen = 0;
+    fielOpen = false;
     document.querySelector('.popupFile')!.classList.add('disable');
   }
 });

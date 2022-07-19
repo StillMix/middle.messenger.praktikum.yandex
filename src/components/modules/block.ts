@@ -1,5 +1,6 @@
 import { EventBus } from "./event-bus";
-
+import { template } from '../blocks/button/button.tmpl';
+import Templator  from './templator'
 // Нельзя создавать экземпляр данного класса
 export class Block {
   static EVENTS = {
@@ -71,17 +72,17 @@ export class Block {
   }
 
   _render() {
-    const block = this.render();
+    const block:HTMLDivElement = this.render();
     // Это небезопасный метод для упрощения логики
     // Используйте шаблонизатор из npm или напишите свой безопасный
     // Нужно компилировать не в строку (или делать это правильно),
     // либо сразу превращать в DOM-элементы и возвращать из compile DOM-ноду
-    this._element!.replaceWith(block);
+    return this._element!.replaceWith(block);
   }
 
     // Переопределяется пользователем. Необходимо вернуть разметку
   render() {
-    
+      return Templator.compile(template);
   }
 
   getContent() {
@@ -102,11 +103,11 @@ export class Block {
   }
 
   show() {
-    this.getContent().style.display = "block";
+    this._element!.style.display = "block";
   }
 
   hide() {
-    this.getContent().style.display = "none";
+    this._element!.style.display = "none";
   }
 }
 
