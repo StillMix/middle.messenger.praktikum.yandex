@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "description": "chat",
   "scripts": {
-    "start": "parcel build ./src/pages/index.html && node ./api/server.js",
+    "start": "parcel build ./src/pages/index.html & node ./api/server.js",
     "dev": "parcel build ./src/pages/index.html & node ./api/server.js",
     "open": "parcel ./src/pages/index.html --open",
     "lint": "eslint ./src",
-    "build": "parcel build src/pages/index.html"
+    "build": "parcel watch src/pages/index.html"
   },
   "repository": {
     "type": "git",

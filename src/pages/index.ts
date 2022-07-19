@@ -17,7 +17,7 @@ validateLogin.disableSubmitButton();
 validateLogin.enableValidation();
 
 const NewPersonValues = new PopupWithForm('.popup__inputs', (values) => {
-  window.location.href = 'http://localhost:1234/chat/chat.html';
+  window.location.href = 'http://localhost:3000/chat/chat.html';
   console.log(values);
 });
 NewPersonValues.setEventListeners();

@@ -1,15 +1,10 @@
-
-
 import './chat.css';
-
 const messageTemplate = (document.querySelector('.element-template') as HTMLTemplateElement).content;
 const messageContainer: HTMLDivElement = document.querySelector('.chatList__chat')!;
 const btnPerson: HTMLButtonElement = document.querySelector('.chat_header_btn')!;
 const btnFiel: HTMLDivElement = document.querySelector('.chat__dopMenu')!;
-
 let fielOpen = false;
 let personOpen = false;
-
 btnPerson.addEventListener('click', () => {
   if (personOpen == false) {
     personOpen = true;
@@ -28,7 +23,6 @@ btnFiel.addEventListener('click', () => {
     document.querySelector('.popupFile')!.classList.add('disable');
   }
 });
-
 const initialCards = [{
   name: 'Архыз',
   message: 'fgdsfsdfsdf',

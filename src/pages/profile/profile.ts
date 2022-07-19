@@ -1,6 +1,4 @@
-
 import './profile.css';
-
 const info = document.querySelector('.info')!;
 const password = document.querySelector('.password')!;
 const btns = document.querySelector('.popup__btns')!;
@@ -8,7 +6,6 @@ const btnData = document.querySelector('.btn__info')!;
 const btnPassword = document.querySelector('.btn__password')!;
 const btnToData = document.querySelector('.data')!;
 const btnToPassword = document.querySelector('.btnToPassword')!;
-
 function to(form:Element) {
   if (form === password) {
     info.classList.add('disable');

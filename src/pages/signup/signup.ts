@@ -1,16 +1,6 @@
-
 import './signup.css';
 import FormValidator from '../../components/FormValidator';
 import PopupWithForm from '../../components/PopupWithForm';
-import Button from '../../components/blocks/button/buttton';
-import { render } from '../../components/modules/renderDOM';
-
-const button = new Button({
-  className: 'popup__btn',
-  child: 'Зарегистрироваться'
-});
-
-render('.popup__inputs', button);
 
 export const validationConfig = {
   formSelector: '.form',
