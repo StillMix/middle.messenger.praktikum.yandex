@@ -13,7 +13,7 @@ const first__name = document.querySelector('[name="nameInput"]')!;
 const login = document.querySelector('[name="loginInput"]')!;
 const second__name = document.querySelector('[name="surnameInput"]')!;
 const tel = document.querySelector('[name="telInput"]')!;
-const codeSpace = 32
+const codeSpace = 32;
 
 function CheckValidate(e) {  
   const key = e.keyCode;
