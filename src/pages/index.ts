@@ -3,6 +3,19 @@ import './style.css';
 import FormValidator from '../components/FormValidator';
 import PopupWithForm from '../components/PopupWithForm';
 
+var login = document.querySelector('[name="loginInput"]')!;
+
+login.addEventListener('keypress', function ( event ) {  
+  var key = event.keyCode;
+   if (key === 32) {
+     event.preventDefault();
+   }
+   if( event.key.match(/[0-9]/) ) {
+    return event.preventDefault();
+   }
+   
+});
+
 export const validationConfig = {
   formSelector: '.form',
   inputSelector: '.input',

@@ -1,7 +1,7 @@
 
 <html lang="ru">
   <head> 
-    <script src="./index.ts" type="module"></script>
+    
   </head>
   <body class="body"> 
     <div class="popup">
@@ -10,17 +10,18 @@
         <label>
           <div class="popup__container"> 
             <p class="popup_container_text">Логин</p>
-            <input class="input popup_container_input" name="loginInput" type="login" id="card-login" placeholder="Введите Логин" required="required" minlength="3" maxlength="20"/>
+            <input class="input popup_container_input" name="loginInput" type="login" pattern="[А-ЯA-Z]{1}[а-яa-z]{1,}" id="card-login" placeholder="Введите Логин" required="required" minlength="3" maxlength="20"/>
           </div><span class="popup_error card-login-error"> </span>
         </label>
         <label>
           <div class="popup__container"> 
             <p class="popup_container_text">Пароль</p>
-            <input class="input popup_container_input" name="onepasswordInput" type="password" id="card-onepassword" placeholder="Введите Пароль" required="required" minlength="8" maxlength="40"/>
+            <input class="input popup_container_input" name="onepasswordInput" pattern="^(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[0-9]).*$" type="password" id="card-onepassword" placeholder="Введите Пароль" required="required" minlength="8" maxlength="40"/>
           </div><span class="popup_error card-onepassword-error"> </span>
         </label><a href="./chat/chat.html"></a>
         <button class="popup__btn" type="submite">Авторизоваться</button>
       </form><a class="popup__redirect" href="./signup/signup.html">Нет аккаунта?</a>
     </div>
+    <script src="./index.ts" type="module"></script>
   </body>
 </html>

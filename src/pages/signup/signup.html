@@ -1,7 +1,7 @@
 
 <html lang="ru">
   <head> 
-    <script src="./signup.ts" type="module"></script>
+    
   </head>
   <body class="body"> 
     <div class="popup">
@@ -16,41 +16,43 @@
         <label> 
           <div class="popup__container"> 
             <p class="popup_container_text">Логин</p>
-            <input class="input popup_container_input" name="loginInput" type="login" id="card-login" placeholder="Введите Логин" required="required" minlength="3" maxlength="20"/>
+            <input class="input popup_container_input" name="loginInput" type="login" id="card-login" placeholder="Введите Логин" pattern="[А-ЯA-Z]{1}[а-яa-z]{1,}" required="required" minlength="3" maxlength="20"/>
           </div><span class="popup_error card-login-error"> </span>
         </label>
         <label> 
           <div class="popup__container"> 
             <p class="popup_container_text">Имя</p>
-            <input class="input popup_container_input" name="nameInput" type="name" id="card-name" placeholder="Введите Имя" required="required" minlength="2" maxlength="200"/>
+            <input class="input popup_container_input"  name="nameInput" type="name" id="card-name" placeholder="Введите Имя" pattern="[А-ЯA-Z]{1}[а-яa-z]{1,}" required="required" minlength="2" maxlength="200"/>
           </div><span class="popup_error card-name-error"> </span>
         </label>
         <label>
           <div class="popup__container"> 
             <p class="popup_container_text">Фамилия</p>
-            <input class="input popup_container_input" name="surnameInput" type="surname" id="card-surname" placeholder="Введите Фамилию" required="required" minlength="2" maxlength="200"/>
+            <input class="input popup_container_input" name="surnameInput" type="surname" id="card-surname" placeholder="Введите Фамилию" pattern="[А-ЯA-Z]{1}[а-яa-z]{1,}" required="required" minlength="2" maxlength="200"/>
           </div><span class="popup_error card-surname-error"> </span>
         </label>
         <label>
           <div class="popup__container"> 
             <p class="popup_container_text">Телефон</p>
-            <input class="input popup_container_input" name="telInput" type="tel" id="card-tel" placeholder="Введите Телефон" required="required" minlength="10" maxlength="15"/>
+            <input class="input popup_container_input" name="telInput" type="tel" id="card-tel" placeholder="Введите Телефон" pattern="+7[0-9]{1,}" value="+7"  required="required" minlength="10" maxlength="15"/>
           </div><span class="popup_error card-tel-error"> </span>
         </label>
         <label>
           <div class="popup__container"> 
             <p class="popup_container_text">Пароль</p>
-            <input class="input popup_container_input" name="onepasswordInput" type="password" id="card-onepassword" placeholder="Введите Пароль" required="required" minlength="8" maxlength="40"/>
+            <input class="input popup_container_input" name="onepasswordInput" type="password" id="card-onepassword" placeholder="Введите Пароль" pattern="^(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[0-9]).*$" required="required" minlength="8" maxlength="40"/>
           </div><span class="popup_error card-onepassword-error"> </span>
         </label>
         <label>
           <div class="popup__container"> 
             <p class="popup_container_text">Пароль ещё раз</p>
-            <input class="input popup_container_input" name="twopasswordInput" type="password" id="card-twopassword" placeholder="Введите Пароль повторно" required="required" minlength="8" maxlength="40"/>
+            <input class="input popup_container_input" name="twopasswordInput" type="password" id="card-twopassword" pattern="^(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[0-9]).*$" placeholder="Введите Пароль повторно" required="required" minlength="8" maxlength="40"/>
           </div><span class="popup_error card-twopassword-error"> </span>
         </label>
         <button class="popup__btn" type="submite">Зарегистрироваться</button>
       </form><a class="popup__redirect" href="../index.html">Войти?</a>
     </div>
+    <script src="./signup.ts" type="module"></script>
   </body>
+
 </html>
