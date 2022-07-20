@@ -9,40 +9,46 @@ export const validationConfig = {
   inactiveButtonClass: "popup__button_disabled",
   inputErrorClass: "input_type_error",
 };
-var first__name = document.querySelector('[name="nameInput"]')!;
-var login = document.querySelector('[name="loginInput"]')!;
-var second__name = document.querySelector('[name="surnameInput"]')!;
+const first__name = document.querySelector('[name="nameInput"]')!;
+const login = document.querySelector('[name="loginInput"]')!;
+const second__name = document.querySelector('[name="surnameInput"]')!;
+const tel = document.querySelector('[name="telInput"]')!;
+const codeSpace = 32
 
-login.addEventListener('keypress', function ( event ) {  
-  var key = event.keyCode;
-   if (key === 32) {
-     event.preventDefault();
+function CheckValidate(e) {  
+  const key = e.keyCode;
+   if (key === codeSpace) {
+     e.preventDefault();
    }
-   if( event.key.match(/[0-9]/) ) {
-    return event.preventDefault();
+   if( e.key.match(/[0-9]/) ) {
+    return e.preventDefault();
    }
    
-});
-
-first__name.addEventListener('keypress', function ( event ) {  
-  var key = event.keyCode;
-   if (key === 32) {
-     event.preventDefault();
+}
+function CheckValidateTel(e) {  
+  const key = e.keyCode;
+   if (key === codeSpace) {
+     e.preventDefault();
    }
-   if( event.key.match(/[0-9]/) ) {
-    return event.preventDefault();
+   if( e.key.match(/[A-Яa-zА-Яа-я]/) ) {
+    return e.preventDefault();
    }
    
+}
+tel.addEventListener('keypress', (event) => {
+  CheckValidateTel(event)
 });
 
-second__name.addEventListener('keypress', function ( event ) {  
-  var key = event.keyCode;
-   if (key === 32) {
-     event.preventDefault();
-   }
-   if( event.key.match(/[0-9]/) ) {
-    return event.preventDefault();
-   }
+login.addEventListener('keypress', (event) => {
+  CheckValidate(event)
+});
+
+first__name.addEventListener('keypress', (event) => {
+  CheckValidate(event)
+});
+
+second__name.addEventListener('keypress', (event) => {
+  CheckValidate(event)
 });
 
 const validateNewPerson = new FormValidator(validationConfig, ".popup__inputs");
