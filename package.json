@@ -7,7 +7,7 @@
     "dev": "parcel build ./src/pages/index.html & node ./api/server.js",
     "open": "parcel ./src/pages/index.html --open",
     "lint": "eslint ./src",
-    "build": "parcel watch src/pages/index.html"
+    "build": "parcel build src/pages/index.html"
   },
   "repository": {
     "type": "git",
