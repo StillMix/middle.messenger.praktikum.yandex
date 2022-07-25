@@ -1,6 +1,18 @@
 import "./signup.css";
 import FormValidator from "../../components/FormValidator";
 import PopupWithForm from "../../components/PopupWithForm";
+import { render } from "../../components/modules/renderDOM";
+import {Button, ButtonProps} from "../../components/blocks/button/buttton";
+
+const buttonProps: ButtonProps = {
+  className: 'popup__btn',
+  name: 'Зарегистрироваться',
+};
+
+
+const registerButton = new Button(buttonProps);
+
+
 
 export const validationConfig = {
   formSelector: ".form",
@@ -9,6 +21,7 @@ export const validationConfig = {
   inactiveButtonClass: "popup__button_disabled",
   inputErrorClass: "input_type_error",
 };
+const formValidator = new FormValidator(validationConfig, '.form')
 const first__name = document.querySelector('[name="nameInput"]')!;
 const login = document.querySelector('[name="loginInput"]')!;
 const second__name = document.querySelector('[name="surnameInput"]')!;
@@ -35,6 +48,11 @@ function CheckValidateTel(e) {
    }
    
 }
+
+
+
+
+
 tel.addEventListener('keypress', (event) => {
   CheckValidateTel(event)
 });
@@ -51,13 +69,12 @@ second__name.addEventListener('keypress', (event) => {
   CheckValidate(event)
 });
 
-const validateNewPerson = new FormValidator(validationConfig, ".popup__inputs");
 
-validateNewPerson.disableSubmitButton();
-validateNewPerson.enableValidation();
 
 const NewPersonValues = new PopupWithForm(".popup__inputs", (values) => {
   console.log(values);
   window.location.href = "http://localhost:3000";
 });
 NewPersonValues.setEventListeners();
+
+formValidator.enableValidation()

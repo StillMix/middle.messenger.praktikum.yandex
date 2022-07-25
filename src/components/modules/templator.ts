@@ -1,55 +1,79 @@
-export default class Templator {
+import get from "./get";
+
+
+export type ctxProps = Record<string, any>;
+
+const TEMPLATE_REG_EXP = /^{{(.*?)}}$/;
+const ITERATOR_REG_EXP = /<each\s{{(.*?)}}>([\s\S]*?)<\/each>/;
+const ITERATOR_DELIMITER = " in ";
+const MESSAGES = {
+  ARRAY_NOT_FOUND: "Массив не найден",
+  TEMPLATE_VAR_NOT_FOUND: "Ошибка поиска переменной",
+};
+
+const isVariable = (string: string) => {
+  const regExp = TEMPLATE_REG_EXP;
+  return regExp.test(string);
+};
+
+const getVariable = (string: string) => {
+  const regExp = TEMPLATE_REG_EXP;
+  const result = string.match(regExp);
+
+  if (!result) {
+    return `${MESSAGES.TEMPLATE_VAR_NOT_FOUND} ${string}`;
+  }
+
+  return result[1];
+};
+
+class Templator {
+  _template: string;
+
+  ITERATOR_START_REGEXP = /\{\{@ (.*?)\}\}/gi;
+  ITERATOR_END_REGEXP = /\{\{@\}\}/gi;
+
   TEMPLATE_REGEXP = /\{\{(.*?)\}\}/gi;
-  _template:any;
-  static compile: any;
-  constructor(template) {
+
+  constructor(template: string) {
     this._template = template;
   }
 
-  compile(ctx) {
+  compile(ctx: ctxProps): string {
     return this._compileTemplate(ctx);
   }
 
-  _compileTemplate(ctx) {
-          let tmpl = this._template;
-        const regExp = this.TEMPLATE_REGEXP;
-        let key = regExp.exec(tmpl);
-      
-          // Важно делать exec именно через константу, иначе уйдёте в бесконечный цикл
-          while ((key)) {
-          if (key[1]) {
-                  const tmplValue = key[1].trim();
-                  // get — функция, написанная ранее в уроке
-            const data = function get(obj, path) {
-              const keys = path.split('.');
-          
-              let result = obj;
-              for (let key of keys) {
-                const value = result[key];
-          
-                if (!value) {
-                  return undefined;        
-                }
-          
-                result = value;
-              }
-          
-              return result;
-          }
-  
-                  if (typeof data === "function") {
-              window[tmplValue] = data;
-              tmpl = tmpl.replace(
-                new RegExp(key[0], "gi"),
-                    `window.${key[1].trim()}()`
-                  );
-              continue;
-            }
+  _compileTemplate = (ctx: ctxProps): string => {
+    let result = "";
 
-            tmpl = tmpl.replace(new RegExp(key[0], "gi"), data);
-          }
-          }
-      
-          return tmpl;
-    }
-  }
+    const elements = this._template
+      .replace(/\s+/g, " ")
+      .replace(/\{\{\s/g, "{{")
+      .replace(/\s\}\}/g, "}}")
+      .replace(ITERATOR_REG_EXP, (substr, meta, template) => {
+        const [item, key] = meta.split(ITERATOR_DELIMITER);
+        const array = get(ctx, key);
+        let result = "";
+        if (!array) {
+          return MESSAGES.ARRAY_NOT_FOUND;
+        }
+        for (let i = 0; i < array.length; i++) {
+          const tmplString = `{{${item}`;
+          const value = `{{${key}[${i}]`;
+          result += template.split(tmplString).join(value);
+        }
+        return result;
+      })
+      .split(/(?<=>)|(?=<)|(?<=\}\})|(?=\{\{)/g)
+      .map((item) => item.trim())
+      .filter((item) => item);
+
+    elements.forEach((item) => {
+      result += isVariable(item) ? get(ctx, getVariable(item)) : item;
+    });
+
+    return result;
+  };
+}
+
+export default Templator;

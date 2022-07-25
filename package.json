@@ -7,7 +7,7 @@
     "dev": "parcel build ./src/pages/index.html & node ./api/server.js",
     "open": "parcel ./src/pages/index.html --open",
     "lint": "eslint ./src",
-    "build": "parcel watch src/pages/index.html"
+    "build": "parcel src/pages/index.html"
   },
   "repository": {
     "type": "git",
@@ -22,6 +22,7 @@
   "dependencies": {
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
+    "handlebars": "^4.7.7",
     "parcel": "^2.6.2",
     "pug": "^3.0.2"
   },

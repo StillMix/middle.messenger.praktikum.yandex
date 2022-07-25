@@ -1,34 +1,34 @@
-export class EventBus {
-  listeners: any;
+type callbackType = (...args: any) => void;
+
+class EventBus {
+  listeners: { [key: string]: callbackType[] };
+
   constructor() {
-      this.listeners = {};
+    this.listeners = {};
   }
 
-  on(event, callback) {
-      if (!this.listeners[event]) {
-          this.listeners[event] = [];
-      }
-
-      this.listeners[event].push(callback);
-}
-
-  off(event, callback) {
-      if (!this.listeners[event]) {
-    throw new Error(`Нет события: ${event}`);
+  on(event: string, callback: callbackType): void {
+    if (!this.listeners[event]) {
+      this.listeners[event] = [];
+    }
+    this.listeners[event].push(callback);
   }
 
-  this.listeners[event] = this.listeners[event].filter(
-    listener => listener !== callback
-  );
-}
+  off(event: string, callback: callbackType): void {
+    if (!this.listeners[event]) {
+      throw Error(`Нет события ${event}`);
+    }
+    this.listeners[event] = this.listeners[event].filter((fn) => fn !== callback);
+  }
 
-  emit(event, ...args) {
-      if (!this.listeners[event]) {
-              throw new Event(`Нет события: ${event}`);
-      }
-
-      this.listeners[event].forEach(listener => {
-          listener(...args);
-      });
+  emit(event: string, ...args: any[]): void {
+    if (!this.listeners[event]) {
+      throw Error(`Нет события ${event}`);
+    }
+    this.listeners[event].forEach(function (listener: callbackType) {
+      listener(...args);
+    });
   }
 }
+
+export default EventBus;

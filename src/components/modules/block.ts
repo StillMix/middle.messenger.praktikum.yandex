@@ -1,65 +1,79 @@
-import { EventBus } from "./event-bus";
-import { template } from '../blocks/button/button.tmpl';
-import Templator  from './templator'
-// Нельзя создавать экземпляр данного класса
-export class Block {
-  static EVENTS = {
-    INIT: "init",
-    FLOW_CDM: "flow:component-did-mount",
-    FLOW_RENDER: "flow:render"
+import EventBus from "./event-bus";
+import Templator from "./templator";
+
+
+
+enum EVENTS {
+  INIT = "init",
+  FLOW_CDM = "flow:component-did-mount",
+  FLOW_CDU = "flow:component-did-update",
+  FLOW_RENDER = "flow:render"
+}
+
+class Block {
+  _element!: HTMLElement;
+
+  _tmpl!: string;
+
+  _meta: {
+    tagName: string,
+    props: Record<string, any>,
   };
+  props: Record<string, any>;
+  eventBus: EventBus;
 
-  protected _element: HTMLElement | null = null;
-
-  eventBus: () => EventBus;
-  props: Object;
-  tagName: string;
-  _meta: { tagName: string; props: {}; };
-
-  constructor(tagName = "div", props = {}) {
-    const eventBus = new EventBus();
-
+  constructor(tagName = "fragment", props = {}, tmpl: string) {
+    this.eventBus = new EventBus();
     this._meta = {
       tagName,
       props
     };
+    this.props = this._makePropsProxy({ ...props });
 
-    this.props = this._makePropsProxy(props);
+    this._tmpl = tmpl;
 
-    this.eventBus = () => eventBus;
-
-    this._registerEvents(eventBus);
-    eventBus.emit(Block.EVENTS.INIT);
+    this._registerEvents();
+    this.eventBus.emit(EVENTS.INIT);
   }
 
-  _registerEvents(eventBus) {
-    eventBus.on(Block.EVENTS.INIT, this.init.bind(this));
-    eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this));
+  _registerEvents(): void {
+    this.eventBus.on(EVENTS.INIT, this.init.bind(this));
+    this.eventBus.on(EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
+    this.eventBus.on(EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
+    this.eventBus.on(EVENTS.FLOW_RENDER, this._render.bind(this));
   }
 
-  _createResources() {
+  _createResources(): void {
     const { tagName } = this._meta;
     this._element = this._createDocumentElement(tagName);
   }
 
-  init() {
+  init(): void {
     this._createResources();
-    this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
+    this.eventBus.emit(EVENTS.FLOW_CDM);
   }
 
-    dispatchComponentDidMount() {
-        this.eventBus().emit(Block.EVENTS.FLOW_CDM);
+  _componentDidMount(): void {
+    this.componentDidMount();
+    this.eventBus.emit(EVENTS.FLOW_RENDER);
+  }
+
+  // eslint-disable-next-line
+  componentDidMount(): void {}
+
+  _componentDidUpdate(oldProps?: Record<string, any>, newProps?: Record<string, any>): void {
+    const response = this.componentDidUpdate(oldProps, newProps);
+    if (!response) {
+      return;
     }
-  _eventBus() {
-    throw new Error("Method not implemented.");
+    this._render();
   }
 
-
-  componentDidUpdate(oldProps, newProps) {
-    return true;
+  componentDidUpdate(oldProps?: Record<string, any>, newProps?: Record<string, any>): boolean {
+    return oldProps !== newProps;
   }
 
-  setProps = nextProps => {
+  setProps = (nextProps: Record<string, any>): void => {
     if (!nextProps) {
       return;
     }
@@ -67,47 +81,94 @@ export class Block {
     Object.assign(this.props, nextProps);
   };
 
-  get element() {
+  get element(): HTMLElement {
     return this._element;
   }
 
-  _render() {
-    const block:HTMLDivElement = this.render();
-    // Это небезопасный метод для упрощения логики
-    // Используйте шаблонизатор из npm или напишите свой безопасный
-    // Нужно компилировать не в строку (или делать это правильно),
-    // либо сразу превращать в DOM-элементы и возвращать из compile DOM-ноду
-    return this._element!.replaceWith(block);
+  addEvents(): void {
+    const { events = {} } = this.props;
+
+    Object.keys(events).forEach((eventName) => {
+      this.element.addEventListener(eventName, events[eventName]);
+    });
   }
 
-    // Переопределяется пользователем. Необходимо вернуть разметку
-  render() {
-      return Templator.compile(template);
+  removeEvents(): void {
+    const { events = {} } = this.props;
+
+    Object.keys(events).forEach((eventName) => {
+      this.element.removeEventListener(eventName, events[eventName]);
+    });
   }
 
-  getContent() {
+  insertInnerComponents(): void {
+    if (this.props.components) {
+      Object.entries(this.props.components).forEach(([key, value]) => {
+        const node = this.element.querySelector(`#${key}`);
+        if (!node) return;
+        if (Array.isArray(value)) {
+          value.forEach((value) => {
+            node.appendChild(value.getContent());
+          });
+        } else {
+          // @ts-expect-error
+          node.appendChild(value.getContent());
+        }
+      });
+    }
+  }
+
+  _render(): void {
+    const block = this.render();
+
+    this.removeEvents();
+
+    this._element.innerHTML = block;
+
+    this.addEvents();
+
+    this.insertInnerComponents();
+  }
+
+  render(): string {
+    return new Templator(this._tmpl).compile(this.props);
+   }
+
+  getContent(): HTMLElement {
     return this.element;
   }
 
-  _makePropsProxy(props) {
-    // Ещё один способ передачи this, но он больше не применяется с приходом ES6+
+  _makePropsProxy(props: Record<string, any>): Record<string, any>  {
     const self = this;
 
-        // Здесь вам предстоит реализовать метод
-    return props;
+    return new Proxy(props, {
+      get: (props, prop: string) => {
+        const value = props[prop];
+        return typeof value === "function" ? value.bind(props) : value;
+      },
+      set: (props, prop: string, value) => {
+        props[prop] = value;
+        self.eventBus.emit(EVENTS.FLOW_CDU, { ...props }, props);
+        return true;
+      },
+      deleteProperty: () => {
+        throw new Error("Нет доступа");
+      }
+    });
   }
 
-  _createDocumentElement(tagName) {
-    // Можно сделать метод, который через фрагменты в цикле создаёт сразу несколько блоков
-    return document.createElement(tagName);
+  _createDocumentElement(tagName: string): HTMLElement {
+    const element = document.createElement(tagName);
+
+    return element;
   }
 
-  show() {
-    this._element!.style.display = "block";
+  show(): void {
+    this.getContent().classList.remove("hidden");
   }
 
-  hide() {
-    this._element!.style.display = "none";
+  hide(): void {
+    this.getContent().classList.add("hidden");
   }
 }
 

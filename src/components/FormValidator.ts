@@ -82,7 +82,10 @@ export default class FormValidator {
         this._isValid(input);
 
         this._toggleButtonState();
+
+        
       });
+
     });
   }
 
