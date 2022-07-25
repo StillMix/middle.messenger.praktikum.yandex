@@ -1,23 +1,37 @@
-mixin inputs(name,types, placeholders)
+mixin inputs(name ,types, placeholders, id)
   div.popup__container 
-    p.popup_container_text name
-    input.popup_container_input(type=types placeholder=placeholders)
+    p.popup_container_text= name
+    input.input.popup_container_input(name=id+"Input" type=types id="card-"+id placeholder=placeholders required  minlength="2" maxlength="200")
 
-doctype html 
+
 html(lang='ru')
   head 
-    script(src='./signup.js' type='module')
+    script(src='./signup.ts' type='module')
   body.body 
     div.popup
       p.popup__title Регистрация
-      div.popup__inputs
-        +inputs('Почта','email', 'Введите Почту')
-        +inputs('Логин','text', 'Введите Логин')
-        +inputs('Имя','text', 'Введите Логин')
-        +inputs('Фамилия','text', 'Введите Фамилию')
-        +inputs('Телефон','tel', 'Введите Телефон')
-        +inputs('Пароль','password', 'Введите Пароль')
-        +inputs('Пароль ещё раз','password', 'Введите Пароль повторно')
-      a(href="../chat/chat.html")
-        button.popup__btn Зарегистрироваться
+      form(class='form popup__inputs', name='signup')
+        label
+          +inputs('Почта','Email', 'Введите Почту', 'email')
+          span.popup_error.card-email-error 
+        label 
+          +inputs('Логин','login', 'Введите Логин', 'login')
+          span.popup_error.card-login-error 
+        label 
+          +inputs('Имя','name', 'Введите Имя','name')
+          span.popup_error.card-name-error 
+        label
+          +inputs('Фамилия','surname', 'Введите Фамилию','surname')
+          span.popup_error.card-surname-error 
+        label
+          +inputs('Телефон','tel', 'Введите Телефон','tel')
+          span.popup_error.card-tel-error 
+        label
+          +inputs('Пароль','password', 'Введите Пароль','onepassword')
+          span.popup_error.card-onepassword-error 
+        label
+          +inputs('Пароль ещё раз','password', 'Введите Пароль повторно','twopassword')
+          span.popup_error.card-twopassword-error 
+        
+        button.popup__btn(type="submite") Зарегистрироваться
       a.popup__redirect(href="../index.html") Войти?

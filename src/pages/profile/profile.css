@@ -1,6 +1,9 @@
 @import url(../../fonts/Inter/inter.css);
 @import url(../../vendor/normalize.css);
 
+.disableinput {
+  pointer-events: none;
+}
 .disable {
   visibility: hidden;
   opacity: 0;
@@ -78,7 +81,7 @@ body {
   margin-left: auto;
   margin-right: auto;
 }
-.form__element {
+.popup__container {
   width: 100%;
   display: flex;
   padding-bottom: 10px;
@@ -86,7 +89,7 @@ body {
   border-bottom: 1px solid #acacac;
 }
 
-.element__name {
+.popup_container_text {
   font-family: "Inter";
   font-style: normal;
   font-weight: 500;
@@ -95,7 +98,7 @@ body {
   color: #1e1e1e;
 }
 
-.element__input {
+.popup_container_input {
   margin-left: auto;
   outline: none;
   border: none;

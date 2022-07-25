@@ -3,3 +3,11 @@ node_modules
 .parcel-cache 
 .cache 
 .idea
+parcel-cache 
+/node_modules
+/.cache
+/dist
+/.vscode
+
+
+
